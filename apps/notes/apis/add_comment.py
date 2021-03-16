@@ -26,18 +26,15 @@ class AddCommentApi(views.APIView):
             data['parent_comment_id'] = data.get('parent_id', None)
             print(data)
             if not data['parent_comment_id']:
-                print("-----------------")
                 comment_obj = comment_service.add_comment(**data)
                 comment_obj.save()
             else:
-                print("+++++++++++++++++")
                 comment_obj = Comment.objects.filter(id=data['parent_comment_id']).first()
                 if not comment_obj:
                     return response.Response("No Parent Comment Found", status=status.HTTP_400_BAD_REQUEST)
                 comment_obj.comment_heirarchy = CommentHeirarchy.PARENT
                 comment_obj.save()
                 data['comment_heirarchy'] = CommentHeirarchy.CHILD
-                print("-----------", data)
                 comment_child_obj = comment_service.add_comment(**data)
                 comment_child_obj.save()
             return response.Response("success", status.HTTP_200_OK)

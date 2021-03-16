@@ -13,7 +13,7 @@ class AddCommentService(object):
         comment_date = kwargs.get('comment_date')
         modified_by = kwargs.get('modified_by')
         modified_on = kwargs.get('modified_on')
-        comment_heirarchy = kwargs.get('CommentHeirarchy', 1)
+        comment_heirarchy = kwargs.get('comment_heirarchy', 1)
 
         assert commented_by, 'User Field is required.'
         assert comments, 'comment Field is required.'

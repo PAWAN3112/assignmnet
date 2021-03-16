@@ -15,7 +15,6 @@ class GetCommentsApi(views.APIView):
     def get(self, request, *args, **kwargs):
         # request_id = self.request.query_params.get('request_id')
         comments = Comment.objects.all().order_by('id')
-        # retry = True
         if comments:
             serializer = GetCommentSerializer(comments, many=True).data
             return response.Response(serializer, status=status.HTTP_200_OK)

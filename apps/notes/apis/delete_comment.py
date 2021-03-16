@@ -16,7 +16,6 @@ class DeleteCommentsApi(views.APIView):
             comments = Comment.objects.filter(id=comment_id)
         elif parent_id:
             comments = Comment.objects.filter(id=parent_id)
-        print("+++++++++++++", comments)
         if comments:
             comments.delete()
             # or mark is active false instead of deleting
